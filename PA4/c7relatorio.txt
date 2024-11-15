@@ -1,0 +1,102 @@
+Etapa 1 - O erro ocorre quando o código tenta colocar o caractere nulo numa posição que não existe na string.
+(Por alguma razão de configuração, o gdb ignora os erros de memória)
+
+Etapa 2 - Script started on 2024-11-14 23:20:51-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==228527== Memcheck, a memory error detector
+==228527== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==228527== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==228527== Command: ./exec
+==228527== 
+==228527== Invalid write of size 1
+==228527==    at 0x1091BC: main (c7correto.c:10)
+==228527==  Address 0x4a9d05a is 0 bytes after a block of size 26 alloc'd
+==228527==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==228527==    by 0x109183: main (c7correto.c:5)
+==228527== 
+==228527== 
+==228527== HEAP SUMMARY:
+==228527==     in use at exit: 0 bytes in 0 blocks
+==228527==   total heap usage: 1 allocs, 1 frees, 26 bytes allocated
+==228527== 
+==228527== All heap blocks were freed -- no leaks are possible
+==228527== 
+==228527== For lists of detected and suppressed errors, rerun with: -s
+==228527== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 23:20:51-03:00 [COMMAND_EXIT_CODE="0"]
+
+GNU gdb (Ubuntu 12.1-0ubuntu1~22.04.2) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./exec[m...
+[?2004h(gdb) [7m(gdb) run[27m
+
+[7m(gdb) watch *(alphabet + 26)[27m
+
+[A[A[C[C[C[C[C[C(gdb) run
+
+[3P(gdb) watch *(alphabet + 
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[A[C[C[C[C[C[C[K
+
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[Kbreak[K[K[K[K[Kbreak 10
+[?2004l
+Breakpoint 1 at [34m0x11b4[m: file [32mc7correto.c[m, line 10.
+[?2004h(gdb) [7mwatch *(alphabet + 26)[27m
+[C[C[C[C[C[Cwatch *(alphabet + 26)
+[?2004l
+No symbol "alphabet" in current context.
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/luiz/Documentos/PAs_ED/PA4/exec[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m () at [32mc7correto.c[m:10
+10	    [31m*([malphabet [31m+[m [35m26[m[31m)[m [31m=[m [31m'[m[35m\0[m[31m'[m[31m;[m [36m//null-terminate the string?[m
+[?2004h[?2004l
+[?2004h(gdb) [7mwatch *(alphabet + 26)[27m
+[C[C[C[C[C[Cwatch *(alphabet + 26)
+[?2004l
+Hardware watchpoint 2: *(alphabet + 26)
+[?2004h(gdb) continue[K[Knext
+[?2004l
+12	    [01mfree[m[31m([malphabet[31m);[m
+[?2004h[?2004l
+[?2004h(gdb) ba[Kt
+[?2004l
+#0  [33mmain[m () at [32mc7correto.c[m:12
+[?2004h(gdb) quit
+
+Etapa 3 - A solução é adicionar mais uma posição na string para alocar o caractere nulo.
+
+Etapa 4 - Script started on 2024-11-14 23:36:27-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==245044== Memcheck, a memory error detector
+==245044== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==245044== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==245044== Command: ./exec
+==245044== 
+==245044== 
+==245044== HEAP SUMMARY:
+==245044==     in use at exit: 0 bytes in 0 blocks
+==245044==   total heap usage: 1 allocs, 1 frees, 27 bytes allocated
+==245044== 
+==245044== All heap blocks were freed -- no leaks are possible
+==245044== 
+==245044== For lists of detected and suppressed errors, rerun with: -s
+==245044== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 23:36:28-03:00 [COMMAND_EXIT_CODE="0"]
+

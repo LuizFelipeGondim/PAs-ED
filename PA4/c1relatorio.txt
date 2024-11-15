@@ -1,0 +1,187 @@
+Etapa 1 - O erro encontrado está relacionado à escrita indevida na memória (Buffer Overflow) quando i é igual a 10
+(Por alguma razão de configuração, o gdb ignora os erros de memória)
+
+Etapa 2 - Script started on 2024-11-14 21:17:50-03:00 [TERM="xterm-256color" TTY="/dev/pts/11" COLUMNS="205" LINES="20"]
+==124538== Memcheck, a memory error detector
+==124538== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==124538== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==124538== Command: ./exec
+==124538== 
+==124538== Invalid write of size 4
+==124538==    at 0x1091B8: main (c1correto.c:9)
+==124538==  Address 0x4a9d068 is 0 bytes after a block of size 40 alloc'd
+==124538==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==124538==    by 0x109185: main (c1correto.c:6)
+==124538== 
+==124538== 
+==124538== HEAP SUMMARY:
+==124538==     in use at exit: 0 bytes in 0 blocks
+==124538==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==124538== 
+==124538== All heap blocks were freed -- no leaks are possible
+==124538== 
+==124538== For lists of detected and suppressed errors, rerun with: -s
+==124538== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 21:17:51-03:00 [COMMAND_EXIT_CODE="0"]
+
+GNU gdb (Ubuntu 12.1-0ubuntu1~22.04.2) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./exec[m...
+[?2004h(gdb) break main
+[?2004l
+Breakpoint 1 at [34m0x117c[m: file [32mc1correto.c[m, line 6.
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/luiz/Documentos/PAs_ED/PA4/exec[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mmain[m ([36margc[m=1, [36margv[m=0x7fffffffd9b8) at [32mc1correto.c[m:6
+6	  [32mint[m [31m*[ma [31m=[m [01mmalloc[m[31m([m[01;34msizeof[m[31m([m[32mint[m[31m)[m [31m*[m [35m10[m[31m);[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+7	  [01;34mif[m [31m(![ma[31m)[m [01;34mreturn[m [31m-[m[35m1[m[31m;[m [36m/*malloc failed*/[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next[C[C[K[K[K[Kprinti [K[K i
+[?2004l
+$1 = 0
+[?2004h(gdb) print i[3Pnext
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) nextprint i
+[?2004l
+$2 = 5
+[?2004h(gdb) print i[3Pnext
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) printi i[K[K[K i
+[?2004l
+$3 = 9
+[?2004h(gdb) a[Kprint i[Ka[10]
+[?2004l
+$4 = 134465
+[?2004h(gdb) bt
+[?2004l
+#0  [33mmain[m ([36margc[m=1, [36margv[m=0x7fffffffd9b8) at [32mc1correto.c[m:9
+[?2004h(gdb) btprint a[10]i[K[3Pnext
+[?2004l
+8	  [01;34mfor[m [31m([mi [31m=[m [35m0[m[31m;[m i [31m<[m [35m11[m[31m;[m i[31m++)[m[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+9	    a[31m[[mi[31m][m [31m=[m i[31m;[m
+[?2004h[?2004l
+[?2004h(gdb) next[2Pbtprint a[10]
+[?2004l
+$5 = 134465
+[?2004h(gdb) print a[10]
+[C[C[C[C[C[C[7Pnext[2Pbtprint a[1
+
+Etapa 3 - A correção consiste em alterar o limite do loop para 10. Não consegui mostrar o erro com o gdb e o comando backtrace, mas ele ainda está lá
+
+Etapa 4 - Script started on 2024-11-14 21:28:32-03:00 [TERM="xterm-256color" TTY="/dev/pts/14" COLUMNS="205" LINES="20"]
+==136219== Memcheck, a memory error detector
+==136219== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==136219== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==136219== Command: ./exec
+==136219== 
+==136219== 
+==136219== HEAP SUMMARY:
+==136219==     in use at exit: 0 bytes in 0 blocks
+==136219==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==136219== 
+==136219== All heap blocks were freed -- no leaks are possible
+==136219== 
+==136219== For lists of detected and suppressed errors, rerun with: -s
+==136219== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 21:28:33-03:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,112 @@
+Etapa 1 - Há dois erros, está havendo acesso de um índice fora dos limites do array e ele não está sendo desalocado.
+(Por alguma razão de configuração, o gdb ignora os erros de memória)
+
+Etapa 2 - Script started on 2024-11-14 23:47:16-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==255955== Memcheck, a memory error detector
+==255955== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==255955== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==255955== Command: ./exec
+==255955== 
+==255955== Invalid write of size 4
+==255955==    at 0x10916B: f (c9correto.c:6)
+==255955==    by 0x109180: main (c9correto.c:11)
+==255955==  Address 0x4a9d068 is 0 bytes after a block of size 40 alloc'd
+==255955==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==255955==    by 0x10915E: f (c9correto.c:5)
+==255955==    by 0x109180: main (c9correto.c:11)
+==255955== 
+==255955== 
+==255955== HEAP SUMMARY:
+==255955==     in use at exit: 40 bytes in 1 blocks
+==255955==   total heap usage: 1 allocs, 0 frees, 40 bytes allocated
+==255955== 
+==255955== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==255955==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==255955==    by 0x10915E: f (c9correto.c:5)
+==255955==    by 0x109180: main (c9correto.c:11)
+==255955== 
+==255955== LEAK SUMMARY:
+==255955==    definitely lost: 40 bytes in 1 blocks
+==255955==    indirectly lost: 0 bytes in 0 blocks
+==255955==      possibly lost: 0 bytes in 0 blocks
+==255955==    still reachable: 0 bytes in 0 blocks
+==255955==         suppressed: 0 bytes in 0 blocks
+==255955== 
+==255955== For lists of detected and suppressed errors, rerun with: -s
+==255955== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 23:47:16-03:00 [COMMAND_EXIT_CODE="0"]
+
+GNU gdb (Ubuntu 12.1-0ubuntu1~22.04.2) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./exec[m...
+[?2004h(gdb) break f
+[?2004l
+Breakpoint 1 at [34m0x1155[m: file [32mc9correto.c[m, line 5.
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/luiz/Documentos/PAs_ED/PA4/exec[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mf[m () at [32mc9correto.c[m:5
+5	  [32mint[m[31m*[m x [31m=[m [01mmalloc[m[31m([m[35m10[m [31m*[m [01;34msizeof[m[31m([m[32mint[m[31m));[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+6	  x[31m[[m[35m10[m[31m][m [31m=[m [35m0[m[31m;[m 
+[?2004h[?2004l
+[?2004h(gdb) lo[K[Kinfo locas[Kls
+[?2004l
+[36mx[m = [34m0x5555555592a0[m
+[?2004h(gdb) print x[10]
+[?2004l
+$1 = 134465
+[?2004h(gdb) print x[10]
+[C[C[C[C[C[Cinfo locals
+[C[C[C[C[C[C[7Pnext
+[?2004l
+7	[31m}[m
+[?2004h[?2004l
+[?2004h(gdb) nextprint x[10]
+[?2004l
+$2 = 0
+[?2004h(gdb) continue
+[?2004l
+Continuing.
+[Inferior 1 (process 257033) exited normally]
+[?2004h[?2004l
+[?2004h(gdb) quit
+
+Etapa 3 - A solução é alcançada através da mudança do limite do array x de 10 para 9 e depois efetuar sua desalocação no final da função f.
+
+Etapa 4 - Script started on 2024-11-14 23:53:11-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==261066== Memcheck, a memory error detector
+==261066== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==261066== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==261066== Command: ./exec
+==261066== 
+==261066== 
+==261066== HEAP SUMMARY:
+==261066==     in use at exit: 0 bytes in 0 blocks
+==261066==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==261066== 
+==261066== All heap blocks were freed -- no leaks are possible
+==261066== 
+==261066== For lists of detected and suppressed errors, rerun with: -s
+==261066== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-14 23:53:12-03:00 [COMMAND_EXIT_CODE="0"]

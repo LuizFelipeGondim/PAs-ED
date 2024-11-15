@@ -1,0 +1,160 @@
+Etapa 1 - O erro ocoree devido ao ponteiro "buf" que não foi alocado corretamente. Quando tento escrever em "buf" com a função sprintf, 
+ela não tem um espaço de memória alocado adequadamente para armazenar o valor formatado, o que pode causar problemas de memória.
+A memória também não desalocada corretamente.
+
+Etapa 2 - Script started on 2024-11-15 01:37:30-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==344994== Memcheck, a memory error detector
+==344994== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==344994== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==344994== Command: ./exec
+==344994== 
+enter a number:
+5
+==344994== Invalid write of size 1
+==344994==    at 0x49006D7: _IO_str_overflow (strops.c:133)
+==344994==    by 0x48FEE33: _IO_default_xsputn (genops.c:399)
+==344994==    by 0x48FEE33: _IO_default_xsputn (genops.c:370)
+==344994==    by 0x48E614C: outstring_func (vfprintf-internal.c:239)
+==344994==    by 0x48E614C: __vfprintf_internal (vfprintf-internal.c:1263)
+==344994==    by 0x48F2988: __vsprintf_internal (iovsprintf.c:95)
+==344994==    by 0x48D1927: sprintf (sprintf.c:30)
+==344994==    by 0x1092A5: printSum (c19correto.c:22)
+==344994==    by 0x1092DD: main (c19correto.c:28)
+==344994==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==344994== 
+==344994== 
+==344994== Process terminating with default action of signal 11 (SIGSEGV)
+==344994==  Access not within mapped region at address 0x0
+==344994==    at 0x49006D7: _IO_str_overflow (strops.c:133)
+==344994==    by 0x48FEE33: _IO_default_xsputn (genops.c:399)
+==344994==    by 0x48FEE33: _IO_default_xsputn (genops.c:370)
+==344994==    by 0x48E614C: outstring_func (vfprintf-internal.c:239)
+==344994==    by 0x48E614C: __vfprintf_internal (vfprintf-internal.c:1263)
+==344994==    by 0x48F2988: __vsprintf_internal (iovsprintf.c:95)
+==344994==    by 0x48D1927: sprintf (sprintf.c:30)
+==344994==    by 0x1092A5: printSum (c19correto.c:22)
+==344994==    by 0x1092DD: main (c19correto.c:28)
+==344994==  If you believe this happened as a result of a stack
+==344994==  overflow in your program's main thread (unlikely but
+==344994==  possible), you can try to increase the size of the
+==344994==  main thread stack using the --main-stacksize= flag.
+==344994==  The main thread stack size used in this run was 8388608.
+==344994== 
+==344994== HEAP SUMMARY:
+==344994==     in use at exit: 2,048 bytes in 2 blocks
+==344994==   total heap usage: 2 allocs, 0 frees, 2,048 bytes allocated
+==344994== 
+==344994== LEAK SUMMARY:
+==344994==    definitely lost: 0 bytes in 0 blocks
+==344994==    indirectly lost: 0 bytes in 0 blocks
+==344994==      possibly lost: 0 bytes in 0 blocks
+==344994==    still reachable: 2,048 bytes in 2 blocks
+==344994==         suppressed: 0 bytes in 0 blocks
+==344994== Reachable blocks (those to which a pointer was found) are not shown.
+==344994== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==344994== 
+==344994== For lists of detected and suppressed errors, rerun with: -s
+==344994== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-15 01:37:34-03:00 [COMMAND_EXIT_CODE="139"]
+
+GNU gdb (Ubuntu 12.1-0ubuntu1~22.04.2) 12.1[m
+Copyright (C) 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from [32m./exec[m...
+[?2004h(gdb) breal printSum
+[?2004l
+Undefined command: "breal".  Try "help".
+[?2004h(gdb) breal printSum[1P printSumk printSum
+[?2004l
+Breakpoint 1 at [34m0x1227[m: file [32mc19correto.c[m, line 16.
+[?2004h(gdb) run
+[?2004l
+Starting program: [32m/home/luiz/Documentos/PAs_ED/PA4/exec[m 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "[32m/lib/x86_64-linux-gnu/libthread_db.so.1[m".
+
+Breakpoint 1, [33mprintSum[m () at [32mc19correto.c[m:16
+16	[31m{[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+18	    [01mprintf[m[31m([m[31m"enter a number:[m[35m\n[m[31m"[m[31m);[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+enter a number:
+19	    [01mfgets[m[31m([mline[31m,[m [35m10[m[31m,[m stdin[31m);[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+5
+21	        [01mstrtok[m[31m([mline[31m,[m [31m"[m[35m\n[m[31m"[m[31m);[m 
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+22	    [01msprintf[m[31m([mbuf[31m,[m[31m"sum=%d"[m[31m,[m[01msum_to_n[m[31m([m[01matoi[m[31m([mline[31m)));[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+
+Program received signal SIGSEGV, Segmentation fault.
+[?2004h(gdb) next
+[?2004l
+5
+21	        [01mstrtok[m[31m([mline[31m,[m [31m"[m[35m\n[m[31m"[m[31m);[m 
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+22	    [01msprintf[m[31m([mbuf[31m,[m[31m"sum=%d"[m[31m,[m[01msum_to_n[m[31m([m[01matoi[m[31m([mline[31m)));[m
+[?2004h[?2004l
+[?2004h(gdb) next
+[?2004l
+
+Program received signal SIGSEGV, Segmentation fault.
+[34m0x00007ffff7e0b6d7[m in [33m__GI__IO_str_overflow[m ([36mfp[m=0x7fffffffd650, [36mc[m=115) at [32m./libio/strops.c[m:133
+133	./libio/strops.c: No such file or directory.
+[?2004h[?2004l
+[?2004h(gdb) continue
+[?2004l
+Continuing.
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
+[?2004h[?2004l
+[?2004h(gdb) quit
+
+Etapa 3 - A correção do erro pode ser feita alocando memória dinamicamente para o ponteiro "buf" usando malloc.
+
+Etapa 4 - Script started on 2024-11-15 01:44:02-03:00 [TERM="xterm-256color" TTY="/dev/pts/22" COLUMNS="205" LINES="20"]
+==352104== Memcheck, a memory error detector
+==352104== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==352104== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==352104== Command: ./exec
+==352104== 
+enter a number:
+5
+sum=15
+==352104== 
+==352104== HEAP SUMMARY:
+==352104==     in use at exit: 0 bytes in 0 blocks
+==352104==   total heap usage: 3 allocs, 3 frees, 2,098 bytes allocated
+==352104== 
+==352104== All heap blocks were freed -- no leaks are possible
+==352104== 
+==352104== For lists of detected and suppressed errors, rerun with: -s
+==352104== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on 2024-11-15 01:44:05-03:00 [COMMAND_EXIT_CODE="0"]
