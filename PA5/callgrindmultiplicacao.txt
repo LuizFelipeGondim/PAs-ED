@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.482409' (creator: callgrind-3.18.1)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 301006944
+Trigger: Program termination
+Profiled target:  bin/matop -m -x 500 -y 500 (PID 482409, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                     
+--------------------------------------------------------------------------------
+5,740,320,660 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                      file:function
+--------------------------------------------------------------------------------
+4,877,755,535 (84.97%)  ???:multiplicaMatrizes [/home/luiz/Documentos/PAs_ED/PA5/bin/matop]
+   12,014,048 ( 0.21%)  ???:inicializaMatrizNula [/home/luiz/Documentos/PAs_ED/PA5/bin/matop]
+    8,011,036 ( 0.14%)  ???:inicializaMatrizAleatoria [/home/luiz/Documentos/PAs_ED/PA5/bin/matop]
+
+
+    
